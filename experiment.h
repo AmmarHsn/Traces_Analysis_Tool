@@ -13,15 +13,16 @@ class Experiment
 {
 private:
     string name;
+    vector<string>information;
     int robots=0;
     int score;
     int timSteps;
     vector<Robot*>robot_list;
-    static int nbrExp;        /// pas besoin !!
 
 public:
-    Experiment(string name, int score,int timeSteps);
+    Experiment(string name,vector<string>info, int score,int timeSteps);
     string getname() const;
+    vector<string>* getinformation();
     int getScore() const;
     int getRobots() const;
     int getTimesteps() const;

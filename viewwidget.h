@@ -8,7 +8,7 @@
 class ViewWidget : public QWidget
 {
 public:
-    ViewWidget(vector<Experiment*>* exp_list);
+    ViewWidget(vector<string>* glb,vector<Experiment*>* exp_list);
 private:
     vector<Experiment*>*list;
 };

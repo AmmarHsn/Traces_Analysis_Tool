@@ -26,12 +26,16 @@ using std::cout;
 using std::endl;
 
 vector<Experiment*>exp_list;
+vector<string>exp_info;
+vector<string>global_info;
+int exp_length;
 int nbrExperiment = 0;
 
 void createExperiment(int score,int timeSteps)
 {
     nbrExperiment++;
-    exp_list.push_back(new Experiment(to_string(nbrExperiment), score, timeSteps));
+    exp_list.push_back(new Experiment(to_string(nbrExperiment),exp_info, score, timeSteps));
+    exp_info.clear();
 }
 
 
@@ -64,6 +68,15 @@ void parseAtom(int& t, int& s,int& c123,int& a,int& n,double&f, string l)
         }
 }
 
+void parseExpLength(string str){
+    istringstream ss(str);
+    string l;
+    string length;
+    while (ss >> l){length=l;}
+    exp_length = stoi(length);
+}
+
+
 void testfunction()
 {
     for (int i=0;i<nbrExperiment;i++){
@@ -87,27 +100,34 @@ int main(int argc, char *argv[])
     //aad link for file to open GUI !
 
 
-    ifstream file("/Users/ammar/Desktop/PROJ-H402/Traces_Analysis_Tool/test.txt");
+    ifstream file("/Users/ammar/Desktop/PROJ-H402/Traces_Analysis_Tool/test2.txt");
     string line;
 
     while (getline(file,line)){
         //getline(file,line);
 
+        if(line.at(0) == '['){          //information about the experiment
+            exp_info.push_back(line);
+            if(line.at(7) == 'T' && line.at(8) == 'o'){parseExpLength(line);} //Total length of experiment
+        }
 
-        if (line.at(0)=='S'){   //Score case! -> creating an experiment
+        else if (line.at(0)=='S'){   //Score case! -> creating an experiment
             string nbr="";
             for (int i=5; i < (int)line.length(); i++){
                 nbr+=line.at(i);
             }
-            createExperiment(stoi(nbr),2500);   // 2500 must be varible!
+            createExperiment(stoi(nbr),exp_length);
             //cout<<nbr<<endl;
         }
-        else if (line.at(0) == '-') {
+        else if (line.at(0) == '-' && line.at(2) == 't') {
             if(line.at(4)=='0'){exp_list.back()->createRobot(exp_list.back()->getRobots());}  //creating a new robot can also do with the t below
             int t=-1,s=-1,c=-1,a=-1,n=-1;          // not initiate can creat problems
             double f=0;
             parseAtom(t, s, c, a, n, f, line);
             exp_list.back()->getLastRobot()->createAtom(t,s,c,a,n,f);
+        }
+        else {
+            global_info.push_back(line);  //global information or error line
         }
     }
 
@@ -121,7 +141,7 @@ int main(int argc, char *argv[])
 
     QApplication app(argc,argv);
 
-    ViewWidget vieuw(&exp_list);
+    ViewWidget vieuw(&global_info,&exp_list);
     vieuw.show();
 
     ////

@@ -11,6 +11,7 @@
 #include <QApplication>
 #include <QtWidgets>
 #include "mainwindow.h"
+#include "interface2.h"
 #include "viewwidget.h"
 
 
@@ -93,14 +94,16 @@ void testfunction()
 
 int main(int argc, char *argv[])
 {
-    //Gui main menu !
+    //Openning desired file !
+
+    QApplication app(argc,argv);                       //fsmlog
+    QString fichier = QFileDialog::getOpenFileName(); // searching the file but add a .txt or file extention controle!
 
 
 
-    //aad link for file to open GUI !
 
-
-    ifstream file("/Users/ammar/Desktop/PROJ-H402/Traces_Analysis_Tool/test2.txt");
+    ifstream file(fichier.toStdString());
+    //ifstream file("/Users/ammar/Desktop/PROJ-H402/Traces_Analysis_Tool/test2.txt");
     string line;
 
     while (getline(file,line)){
@@ -131,6 +134,7 @@ int main(int argc, char *argv[])
         }
     }
 
+
     /*
     //testing the data structure!
     testfunction();
@@ -139,11 +143,16 @@ int main(int argc, char *argv[])
 
     //Gui main menu !
 
-    QApplication app(argc,argv);
+    Interface2 mn(nullptr, &exp_list);
+    mn.show();
 
+
+
+    /*
+    //SIMPLE GUI
     ViewWidget vieuw(&global_info,&exp_list);
     vieuw.show();
-
+    */
     ////
 
     return app.exec();

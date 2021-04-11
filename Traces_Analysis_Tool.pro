@@ -8,6 +8,7 @@ CONFIG += c++11
 SOURCES += \
         atom.cpp \
         experiment.cpp \
+        interface2.cpp \
         main.cpp \
         mainwindow.cpp \
         robot.cpp \
@@ -16,6 +17,7 @@ SOURCES += \
 HEADERS += \
     atom.h \
     experiment.h \
+    interface2.h \
     mainwindow.h \
     robot.h \
     viewwidget.h
@@ -23,3 +25,6 @@ HEADERS += \
 DISTFILES += \
     test.txt \
     test2.txt
+
+FORMS += \
+    interface2.ui

@@ -128,6 +128,7 @@ int main(int argc, char *argv[])
             double f=0;
             parseAtom(t, s, c, a, n, f, line);
             exp_list.back()->getLastRobot()->createAtom(t,s,c,a,n,f);
+            exp_list.back()->getLastRobot()->setAtom(0);
         }
         else {
             global_info.push_back(line);  //global information or error line

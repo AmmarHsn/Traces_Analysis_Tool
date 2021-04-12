@@ -14,11 +14,11 @@ class Robot
 {
 private:
     string name;
-    int currentState;
-    int previousState;
-    int nextState;
-    int time;
-    double sensor;
+    int currentState=-1;
+    int previousState=-1;
+    int nextState=-1;
+    int time=-1;
+    double sensor=-1;
     vector<Atom*> config;
     int nbrAtom=0;
 public:

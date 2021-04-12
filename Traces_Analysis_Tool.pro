@@ -12,6 +12,7 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
         robot.cpp \
+        robotwidget.cpp \
         viewwidget.cpp
 
 HEADERS += \
@@ -20,6 +21,7 @@ HEADERS += \
     interface2.h \
     mainwindow.h \
     robot.h \
+    robotwidget.h \
     viewwidget.h
 
 DISTFILES += \
@@ -27,4 +29,5 @@ DISTFILES += \
     test2.txt
 
 FORMS += \
-    interface2.ui
+    interface2.ui \
+    robotwidget.ui

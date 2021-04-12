@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QTreeWidget>
 #include "experiment.h"
+#include "robotwidget.h"
 
 namespace Ui {
 class Interface2;
@@ -25,6 +26,8 @@ private:
     Ui::Interface2 *ui;
     vector<Experiment*>* expr_list;
     void load_expr();
+    vector<RobotWidget*> showing_robots;
+    void delete_showing_robots();
 };
 
 #endif // INTERFACE2_H

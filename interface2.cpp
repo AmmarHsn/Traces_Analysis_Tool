@@ -93,6 +93,9 @@ void Interface2::setRobots(QTreeWidgetItem *item){
         }
         showing_robots.push_back(rob);
     }
+    string show="Showing now ";
+    show+=expr_list->at(pos)->getname();
+    ui->statusbar->showMessage(QString::fromStdString(show));
 
 }
 

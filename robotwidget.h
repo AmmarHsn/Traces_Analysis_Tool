@@ -3,6 +3,9 @@
 
 #include <QWidget>
 #include "robot.h"
+//A retirer
+#include<QMessageBox>
+#include "robotinfowidget.h"
 
 namespace Ui {
 class RobotWidget;
@@ -20,6 +23,12 @@ public:
 public slots:
     void refresh_info(int nbr);
     void set_spinbox(int value);
+
+protected:
+    void mouseDoubleClickEvent(QMouseEvent* event)
+    {//QMessageBox::information(this,"","Button::mouseDoubleClickEvent");
+        new RobotInfoWidget(robot);
+    }
 
 private:
     Ui::RobotWidget *ui;

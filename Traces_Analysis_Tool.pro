@@ -14,6 +14,7 @@ SOURCES += \
         mainwindow.cpp \
         mypushboutton.cpp \
         robot.cpp \
+        robotinfowidget.cpp \
         robotwidget.cpp \
         viewwidget.cpp
 
@@ -25,6 +26,7 @@ HEADERS += \
     mainwindow.h \
     mypushboutton.h \
     robot.h \
+    robotinfowidget.h \
     robotwidget.h \
     viewwidget.h
 

@@ -111,8 +111,7 @@ int main(int argc, char *argv[])
 
     QApplication app(argc,argv);                       //fsmlog
     QString fichier = QFileDialog::getOpenFileName(); // searching the file but add a .txt or file extention controle!
-
-
+    //QSize screen_size = app.screens()[0]->size();
 
 
     ifstream file(fichier.toStdString());

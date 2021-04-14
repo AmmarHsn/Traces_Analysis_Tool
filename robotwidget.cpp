@@ -36,7 +36,7 @@ void RobotWidget::setRobot(){
 }
 
 void RobotWidget::setColor(vector<QColor>* colors){this->colors=colors;colorfilter=true;}
-
+Robot* RobotWidget::getRobot(){return robot;}
 
 //slots
 void RobotWidget::refresh_info(int nbr){

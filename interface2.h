@@ -6,6 +6,7 @@
 #include "experiment.h"
 #include "robotwidget.h"
 #include "colorwidget.h"
+#include "zoom.h"
 
 namespace Ui {
 class Interface2;
@@ -24,6 +25,9 @@ public slots:
     void setColor();
 
 
+private slots:
+    void on_actionRobots_triggered();
+
 private:
     Ui::Interface2 *ui;
     vector<Experiment*>* expr_list;
@@ -35,6 +39,7 @@ private:
     vector<QColor>* colors;
     ColorWidget* cw;
     bool colorfilter=false;
+    Zoom* z;
 };
 
 #endif // INTERFACE2_H

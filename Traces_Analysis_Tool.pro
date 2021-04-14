@@ -16,7 +16,8 @@ SOURCES += \
         robot.cpp \
         robotinfowidget.cpp \
         robotwidget.cpp \
-        viewwidget.cpp
+        viewwidget.cpp \
+        zoom.cpp
 
 HEADERS += \
     atom.h \
@@ -28,7 +29,8 @@ HEADERS += \
     robot.h \
     robotinfowidget.h \
     robotwidget.h \
-    viewwidget.h
+    viewwidget.h \
+    zoom.h
 
 DISTFILES += \
     test.txt \
@@ -37,4 +39,5 @@ DISTFILES += \
 FORMS += \
     colorwidget.ui \
     interface2.ui \
-    robotwidget.ui
+    robotwidget.ui \
+    zoom.ui

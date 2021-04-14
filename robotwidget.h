@@ -15,6 +15,7 @@ class RobotWidget : public QWidget
 public:
     explicit RobotWidget(QWidget *parent = nullptr,Robot* rob=nullptr);
     ~RobotWidget();
+    void setColor(vector<QColor>* colors);
 
 public slots:
     void refresh_info(int nbr);
@@ -24,6 +25,8 @@ private:
     Ui::RobotWidget *ui;
     Robot* robot;
     void setRobot();
+    vector<QColor>* colors;
+    bool colorfilter=false;
 
 };
 

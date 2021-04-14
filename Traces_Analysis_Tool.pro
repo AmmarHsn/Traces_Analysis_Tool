@@ -7,19 +7,23 @@ CONFIG += c++11
 
 SOURCES += \
         atom.cpp \
+        colorwidget.cpp \
         experiment.cpp \
         interface2.cpp \
         main.cpp \
         mainwindow.cpp \
+        mypushboutton.cpp \
         robot.cpp \
         robotwidget.cpp \
         viewwidget.cpp
 
 HEADERS += \
     atom.h \
+    colorwidget.h \
     experiment.h \
     interface2.h \
     mainwindow.h \
+    mypushboutton.h \
     robot.h \
     robotwidget.h \
     viewwidget.h
@@ -29,5 +33,6 @@ DISTFILES += \
     test2.txt
 
 FORMS += \
+    colorwidget.ui \
     interface2.ui \
     robotwidget.ui

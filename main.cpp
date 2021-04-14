@@ -16,6 +16,7 @@
 
 
 
+
 using std::ifstream;
 using std::getline;
 using std::string;
@@ -30,6 +31,7 @@ vector<Experiment*>exp_list;
 vector<string>exp_info;
 vector<string>global_info;
 int exp_length;
+int nstates;
 int nbrExperiment = 0;
 
 void createExperiment(int score,int timeSteps)
@@ -53,7 +55,7 @@ void parseAtom(int& t, int& s,int& c123,int& a,int& n,double&f, string l)
             else if (word.at(2)=='n'){ss>>word;n=stoi(word);}
             else if (word.at(2)=='f'){ss>>word;f=stod(word);} //fct aussi avec stoi
             else if (word.at(2)=='a'){ss>>word;a=stoi(word);}
-            else if (word.at(2)=='s'){char a=word.at(3);ss>>word;word=a+word;s=stoi(word);}
+            else if (word.at(2)=='s'){char a=word.at(3);ss>>word;word=a;s=stoi(word);} //Attention prend que char3
             else if (word.at(2)=='c'){
                 char b=word.at(3);
                 string b1;
@@ -75,6 +77,17 @@ void parseExpLength(string str){
     string length;
     while (ss >> l){length=l;}
     exp_length = stoi(length);
+}
+
+void parseNbrStates(string str){
+    istringstream ss(str);
+    string nbr;
+    while(ss >>nbr){
+        if(nbr=="--nstates"){
+            ss>>nbr;
+            break;
+        }
+    }nstates=stoi(nbr);
 }
 
 
@@ -131,6 +144,7 @@ int main(int argc, char *argv[])
             exp_list.back()->getLastRobot()->setAtom(0);
         }
         else {
+            if(line.at(2)=='f'){parseNbrStates(line);}
             global_info.push_back(line);  //global information or error line
         }
     }
@@ -144,7 +158,7 @@ int main(int argc, char *argv[])
 
     //Gui main menu !
 
-    Interface2 mn(nullptr, &exp_list);
+    Interface2 mn(nullptr, &exp_list, &global_info,nstates);
     mn.show();
 
 

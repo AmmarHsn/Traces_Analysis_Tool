@@ -3,16 +3,21 @@
 #include <QStandardItemModel>
 #include <QString>
 #include <string>
-
+#include <QPushButton>
 #include <iostream>
 
-Interface2::Interface2(QWidget *parent, vector<Experiment*>* exp_list) :
+Interface2::Interface2(QWidget *parent, vector<Experiment*>* exp_list, vector<string>*global_info, int nstates) :
     QMainWindow(parent),
     ui(new Ui::Interface2)
 {
     ui->setupUi(this);
     expr_list = exp_list;
+    this->global_info = global_info;
+    this->nstates=nstates;
     load_expr();
+    cw = new ColorWidget(this,nstates);
+    ui->verticalLayout->addWidget(cw); // tester avec n grand !
+    QObject::connect(cw,SIGNAL(setColor()),this,SLOT(setColor()));
     QObject::connect(ui->my_treeWidget, SIGNAL(itemClicked(QTreeWidgetItem*,int)), this, SLOT(setRobots(QTreeWidgetItem*)));
     QObject::connect(ui->horizontalSlider, SIGNAL(valueChanged(int)), ui->spinBox, SLOT(setValue(int)));
     QObject::connect(ui->spinBox, SIGNAL(valueChanged(int)), ui->horizontalSlider, SLOT(setValue(int)));
@@ -45,6 +50,9 @@ void Interface2::delete_showing_robots(){                                   //do
     showing_robots.clear();
 }
 
+
+
+
 //slots
 void Interface2::setRobots(QTreeWidgetItem *item){
     //ui->verticalLayout->clear();
@@ -60,11 +68,10 @@ void Interface2::setRobots(QTreeWidgetItem *item){
     }
     //Display information box:
     ui->textEdit->clear();
-    vector<string>* info = expr_list->at(pos)->getinformation();
-    for (int i =0;i<(int)info->size();i++) {
-        ui->textEdit->append(QString::fromStdString(info->at(i)));
-    }
+    for (int i=0;i<(int)global_info->size();i++) {ui->textEdit->append((QString::fromStdString(global_info->at(i))));}
 
+    vector<string>* info = expr_list->at(pos)->getinformation();
+    for (int i =0;i<(int)info->size();i++) {ui->textEdit->append(QString::fromStdString(info->at(i)));}
 
     //Creating robotWidgets and placing it in a grid
     int col=0;
@@ -73,6 +80,7 @@ void Interface2::setRobots(QTreeWidgetItem *item){
     ui->horizontalSlider->setMaximum(expr_list->at(pos)->getTimesteps()-1);
     for (int i=0;i<expr_list->at(pos)->getRobots();i++) {
         RobotWidget* rob = new RobotWidget(this, expr_list->at(pos)->getRobot(i));
+        if(colorfilter){rob->setColor(colors);}
         QObject::connect(ui->spinBox, SIGNAL(valueChanged(int)), rob, SLOT(set_spinbox(int)));
         if(col<4){  //MAKE A GENERAL PARAMETER!
         ui->gridLayout_5->addWidget(rob,row,col);
@@ -84,4 +92,10 @@ void Interface2::setRobots(QTreeWidgetItem *item){
         }
         showing_robots.push_back(rob);
     }
+}
+
+void Interface2::setColor(){
+    this->colors=cw->getColors();
+    colorfilter=true;
+    for (int i=0;i<(int)showing_robots.size();i++) {showing_robots.at(i)->setColor(colors);}
 }

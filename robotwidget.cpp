@@ -27,7 +27,15 @@ void RobotWidget::setRobot(){
     ui->ns->setText(QString::number(robot->getNextState()));
     //ui->ti->setText(QString::number(robot->getTime()));
     ui->sr->setText(QString::number(robot->getSensorReading()));
+    if(colorfilter){
+        QString ca = "color:";
+        ca+= colors->at(robot->getCurrentState()).name();
+        ca+=";";
+        ui->frame->setStyleSheet((ca));
+    }
 }
+
+void RobotWidget::setColor(vector<QColor>* colors){this->colors=colors;colorfilter=true;}
 
 
 //slots

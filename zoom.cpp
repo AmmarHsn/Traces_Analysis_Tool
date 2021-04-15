@@ -7,7 +7,8 @@
 #include <iostream>
 #include <QSlider>
 #include <QLabel>
-#include <QSpinBox>
+
+#include <QPushButton>
 
 
 Zoom::Zoom(QWidget *parent, vector<RobotWidget*>* showing_robots) :
@@ -17,6 +18,9 @@ Zoom::Zoom(QWidget *parent, vector<RobotWidget*>* showing_robots) :
     ui->setupUi(this);
     this->showFullScreen();
     this->showing_robots=showing_robots;
+    this->timer = new QTimer;
+    QObject::connect(timer,SIGNAL(timeout()),this,SLOT(startTimer()));
+
 
     createToolbar();
 
@@ -48,8 +52,16 @@ int Zoom::grid_size(){
 
 void Zoom::createToolbar(){
 
+    QLabel* timerms = new QLabel("Timer in ms :");
+    timerbox = new QSpinBox;
+    timerbox->setMaximum(1000000); //A verifier
+    QPushButton* start = new QPushButton("Start");
+    QObject::connect(start,SIGNAL(clicked()),this,SLOT(startTimer()));
+    QPushButton* stop = new QPushButton("Stop");
+    QObject::connect(stop,SIGNAL(clicked()),timer,SLOT(stop()));
+
     QLabel* lab = new QLabel("Time :");
-    QSpinBox* box = new QSpinBox;
+    box = new QSpinBox;
     QSlider* slider = new QSlider(Qt::Horizontal);
     int nbrRobot = (int)showing_robots->size();
     if(nbrRobot!=0){
@@ -63,9 +75,24 @@ void Zoom::createToolbar(){
     }
 
     QToolBar* bar=new QToolBar(this);
+    //Timer
+    bar->addWidget(timerms);
+    bar->addWidget(timerbox);
+    bar->addWidget(start);
+    bar->addWidget(stop);
+
+    //Filter
     bar->addWidget(lab);
     bar->addWidget(box);
     bar->addWidget(slider);
     ui->verticalLayout->addWidget(bar);
+}
+
+
+//slots
+
+void Zoom::startTimer(){
+    int val = box->value();
+    if(val<box->maximum()){box->setValue(val+1);timer->start(timerbox->value());}
 }
 

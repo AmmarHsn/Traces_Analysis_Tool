@@ -4,6 +4,8 @@
 #include <QDialog>
 #include <vector>
 #include "robotwidget.h"
+#include <QTimer>
+#include <QSpinBox>
 
 namespace Ui {
 class Zoom;
@@ -17,12 +19,18 @@ public:
     explicit Zoom(QWidget *parent = nullptr,vector<RobotWidget*>* showing_robots=nullptr);
     ~Zoom();
 
+public slots:
+    void startTimer();
+
+
 private:
     Ui::Zoom *ui;
     vector<RobotWidget*>* showing_robots;
     int grid_size();
     void createToolbar();
-
+    QSpinBox* box;
+    QSpinBox* timerbox;
+    QTimer* timer;
 };
 
 #endif // ZOOM_H

@@ -26,6 +26,7 @@ void RobotWidget::setRobot(){
     ui->cs->setText(QString::number(robot->getCurrentState()));
     ui->ns->setText(QString::number(robot->getNextState()));
     //ui->ti->setText(QString::number(robot->getTime()));
+    ui->nbrNeighbors->setText(QString::number(robot->getNeighbor()));
     ui->sr->setText(QString::number(robot->getSensorReading()));
     if(colorfilter){
         QString ca = "color:";

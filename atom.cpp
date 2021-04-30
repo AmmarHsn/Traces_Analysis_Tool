@@ -3,12 +3,11 @@
 
 #include <iostream>
 
-Atom::Atom(int t, int s,int c123,int a,int n, double sens)
+Atom::Atom(int t, int s, string stateInfo,int n, double sens)
 {
     this->time=t;
     this->state=s;
-    this->c123=c123;
-    this->a=a;
+    this->stateInformation=stateInfo;
     this->neighbor=n;
     this->sensorReading=sens;
 
@@ -17,5 +16,6 @@ Atom::Atom(int t, int s,int c123,int a,int n, double sens)
 //Getters
 int Atom::getTime()const{return time;}
 int Atom::getstate()const{return state;}
+string Atom::getStateInfo()const{return stateInformation;}
 int Atom::getNeighbor()const{return neighbor;}
 double Atom::getSensorReading()const{return sensorReading;}

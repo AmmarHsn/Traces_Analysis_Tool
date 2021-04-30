@@ -19,6 +19,7 @@ RobotInfoWidget::RobotInfoWidget(Robot* rob): QDialog()
     QVBoxLayout *layout = new QVBoxLayout;
     QStandardItemModel *modele = new QStandardItemModel;
 
+
     QStandardItem *item = new QStandardItem(QString::fromStdString(robot->getName()));
     modele->appendRow(item);
 
@@ -29,11 +30,14 @@ RobotInfoWidget::RobotInfoWidget(Robot* rob): QDialog()
 
         //Info
         item1->appendRow(new QStandardItem(QString::fromStdString("State = "+ to_string((robot->getAtom(k)->getstate())))));
+        string stateInfo = robot->getAtom(k)->getStateInfo();
+        if (stateInfo!=""){item1->appendRow(new QStandardItem(QString::fromStdString("State Information : "+stateInfo)));}
         item1->appendRow(new QStandardItem(QString::fromStdString("Neighbors = "+ to_string((robot->getAtom(k)->getNeighbor())))));
         item1->appendRow(new QStandardItem(QString::fromStdString("Sensor = "+ to_string((robot->getAtom(k)->getSensorReading())))));
     }
 
     QTreeView *vue = new QTreeView;
+
     vue->setModel(modele);
     layout->addWidget(vue);
     setLayout(layout);

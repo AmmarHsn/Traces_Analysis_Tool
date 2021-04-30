@@ -1,21 +1,24 @@
 #ifndef ATOM_H
 #define ATOM_H
 
+#include <string>
+using std::string;
+
 
 class Atom
 {
 private:
     int time;
     int state;
-    int c123;    //not always
-    int a;      //not always
+    string stateInformation="";
     int neighbor;
     double sensorReading;
 
 public:
-    Atom(int t, int s,int c123,int a,int n, double sens);
+    Atom(int t, int s, string stateInfo,int n, double sens);
     int getTime()const;
     int getstate()const;
+    string getStateInfo()const;
     int getNeighbor()const;
     double getSensorReading()const;
 };

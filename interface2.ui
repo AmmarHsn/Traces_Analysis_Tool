@@ -51,6 +51,11 @@
                <string>#Robots</string>
               </property>
              </column>
+             <column>
+              <property name="text">
+               <string>Time Steps</string>
+              </property>
+             </column>
             </widget>
            </item>
            <item>

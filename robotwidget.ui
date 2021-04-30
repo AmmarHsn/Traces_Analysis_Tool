@@ -120,6 +120,24 @@
          </layout>
         </item>
         <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QLabel" name="neighbors">
+            <property name="text">
+             <string>Neighbors :</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="nbrNeighbors">
+            <property name="text">
+             <string>value</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
          <layout class="QHBoxLayout" name="horizontalLayout_5">
           <item>
            <widget class="QLabel" name="sensor">

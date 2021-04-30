@@ -37,6 +37,7 @@ void Interface2::load_expr(){
         exp->setText(0,tr(qPrintable(QString::fromStdString(expr_list->at(i)->getname()))));
         exp->setText(1,tr(qPrintable(QString::number(expr_list->at(i)->getScore()))));
         exp->setText(2,tr(qPrintable(QString::number(expr_list->at(i)->getRobots()))));
+        exp->setText(3,tr(qPrintable((QString::number(expr_list->at(i)->getTimesteps())))));
     }
 }
 
@@ -51,6 +52,15 @@ void Interface2::delete_showing_robots(){                                   //do
     showing_robots.clear();
 }
 
+int Interface2::grid_size(){
+    QSize total_width =ui->scrollArea->size();
+    QSize rob = showing_robots.at(0)->minimumSize();
+    std::cout<<total_width.width()<<std::endl;
+    std::cout<<rob.width()<<std::endl;
+    int factor = (int) total_width.width()/rob.width();
+    std::cout<<"ok"<<std::endl;
+    return factor;
+}
 
 
 
@@ -77,12 +87,14 @@ void Interface2::setRobots(QTreeWidgetItem *item){
     //Creating robotWidgets and placing it in a grid
     int col=0;
     int row=0;
+    int maxcol=1;
     ui->spinBox->setMaximum(expr_list->at(pos)->getTimesteps()-1);
     ui->horizontalSlider->setMaximum(expr_list->at(pos)->getTimesteps()-1);
     for (int i=0;i<expr_list->at(pos)->getRobots();i++) {
         RobotWidget* rob = new RobotWidget(nullptr, expr_list->at(pos)->getRobot(i));  //nullptr -> this
         if(colorfilter){rob->setColor(colors);}
         QObject::connect(ui->spinBox, SIGNAL(valueChanged(int)), rob, SLOT(set_spinbox(int)));
+        if(i==1){}//maxcol=grid_size();}
         if(col<4){  //MAKE A GENERAL PARAMETER!
         ui->gridLayout_5->addWidget(rob,row,col);
         col++;

@@ -45,7 +45,7 @@ void createExperiment(int score,int timeSteps)
 
 //--t 691 --s2 0 --c0 0 1 0.75 --a 1 --n 0 --f 0
 
-void parseAtom(int& t, int& s,int& c123,int& a,int& n,double&f, string l)
+void parseAtom(int& t, int& s, string& stateInfo,int& n,double&f, string l)
 {
     istringstream ss(l);
     string word;
@@ -54,18 +54,21 @@ void parseAtom(int& t, int& s,int& c123,int& a,int& n,double&f, string l)
             if(word.at(2)=='t'){ss>>word;t=stoi(word);}
             else if (word.at(2)=='n'){ss>>word;n=stoi(word);}
             else if (word.at(2)=='f'){ss>>word;f=stod(word);} //fct aussi avec stoi
-            else if (word.at(2)=='a'){ss>>word;a=stoi(word);}
-            else if (word.at(2)=='s'){char a=word.at(3);ss>>word;word=a;s=stoi(word);} //Attention prend que char3
+            else if (word.at(2)=='a'){stateInfo+=word+" ";ss>>word;stateInfo+=word;}
+            else if (word.at(2)=='s'){
+                string state="";
+                for (int i=3;i<(int)word.length();i++){state+=word.at(i);} // loop is important if the state is >= 10
+                ss>>word; //do nothing with this info
+                word=state;
+                s=stoi(word);}
             else if (word.at(2)=='c'){
-                char b=word.at(3);
-                string b1;
+                stateInfo +=word+" ";
                 ss>>word;
-                b1=b+word;
+                stateInfo +=word+" ";
                 ss>>word;
-                b1+=word;
+                stateInfo +=word+" ";
                 ss>>word;
-                b1+=word;
-                c123=stoi(b1);  // il a desfois des double utilisation de stod !
+                stateInfo +=word+" ";
             }
 
         }
@@ -110,7 +113,7 @@ int main(int argc, char *argv[])
     //Openning desired file !
 
     QApplication app(argc,argv);                       //fsmlog
-    QString fichier = QFileDialog::getOpenFileName(); // searching the file but add a .txt or file extention controle!
+    QString fichier = QFileDialog::getOpenFileName(nullptr,"Open File","", "Files (*fsmlog)"); // searching the file with file extention control!
     //QSize screen_size = app.screens()[0]->size();
 
 
@@ -136,10 +139,11 @@ int main(int argc, char *argv[])
         }
         else if (line.at(0) == '-' && line.at(2) == 't') {
             if(line.at(4)=='0'){exp_list.back()->createRobot(exp_list.back()->getRobots());}  //creating a new robot can also do with the t below
-            int t=-1,s=-1,c=-1,a=-1,n=-1;          // not initiate can creat problems
+            int t=-1,s=-1,n=-1;          // not initiate can creat problems
+            string stateInfo="";
             double f=0;
-            parseAtom(t, s, c, a, n, f, line);
-            exp_list.back()->getLastRobot()->createAtom(t,s,c,a,n,f);
+            parseAtom(t, s, stateInfo, n, f, line);
+            exp_list.back()->getLastRobot()->createAtom(t,s,stateInfo,n,f);
             exp_list.back()->getLastRobot()->setAtom(0);
         }
         else {
@@ -162,11 +166,11 @@ int main(int argc, char *argv[])
 
 
 
-    /*
+/*
     //SIMPLE GUI
     ViewWidget vieuw(&global_info,&exp_list);
     vieuw.show();
-    */
+*/
     ////
 
     return app.exec();

@@ -60,7 +60,6 @@ vector<QColor>* ColorWidget::getColors(){return &colors;}
 
 //slots
 void ColorWidget::setColor(int state){
-    std::cout<<state<<std::endl;
     colors.at(state) = QColorDialog::getColor(Qt::white, this);
     stateColor.at(state)->setText(colors.at(state).name());
     if(allButtonSet()){

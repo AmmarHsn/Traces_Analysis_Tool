@@ -40,6 +40,7 @@ private:
     ColorWidget* cw;
     bool colorfilter=false;
     Zoom* z;
+    int grid_size();
 };
 
 #endif // INTERFACE2_H

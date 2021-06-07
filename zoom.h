@@ -6,6 +6,10 @@
 #include "robotwidget.h"
 #include <QTimer>
 #include <QSpinBox>
+#include <QToolBar>
+#include <QLabel>
+#include <QPushButton>
+
 
 namespace Ui {
 class Zoom;

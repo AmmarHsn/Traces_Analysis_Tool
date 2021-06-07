@@ -27,18 +27,18 @@ using std::istringstream;
 using std::cout;
 using std::endl;
 
-vector<Experiment*>exp_list;
-vector<string>exp_info;
-vector<string>global_info;
-int exp_length;
-int nstates;
+vector<Experiment*>experiments;
+vector<string>infoAboutExperiment;
+vector<string>infoAboutAllExperiments;
+int experimentLength;
+int nbrStates;
 int nbrExperiment = 0;
 
 void createExperiment(int score,int timeSteps)
 {
     nbrExperiment++;
-    exp_list.push_back(new Experiment(to_string(nbrExperiment),exp_info, score, timeSteps));
-    exp_info.clear();
+    experiments.push_back(new Experiment(to_string(nbrExperiment),infoAboutExperiment, score, timeSteps));
+    infoAboutExperiment.clear();
 }
 
 
@@ -79,7 +79,7 @@ void parseExpLength(string str){
     string l;
     string length;
     while (ss >> l){length=l;}
-    exp_length = stoi(length);
+    experimentLength = stoi(length);
 }
 
 void parseNbrStates(string str){
@@ -90,18 +90,18 @@ void parseNbrStates(string str){
             ss>>nbr;
             break;
         }
-    }nstates=stoi(nbr);
+    }nbrStates=stoi(nbr);
 }
 
 
 void testfunction()
 {
     for (int i=0;i<nbrExperiment;i++){
-        cout <<"Name = "+exp_list.at(i)->getname() <<endl;
-        cout<<"Score = "<<exp_list.at(i)->getScore()<<endl;
-        cout<<"nbr of robots = "<<exp_list.at(i)->getRobots()<<endl;
-        for(int j=0; j<exp_list.at(i)->getRobots();j++){
-            cout<<"NBR Atoms of Robot"<<j<<" = "<<exp_list.at(i)->getRobot(j)->getNbrAtom()<<endl;
+        cout <<"Name = "+experiments.at(i)->getname() <<endl;
+        cout<<"Score = "<<experiments.at(i)->getScore()<<endl;
+        cout<<"nbr of robots = "<<experiments.at(i)->getRobots()<<endl;
+        for(int j=0; j<experiments.at(i)->getRobots();j++){
+            cout<<"NBR Atoms of Robot"<<j<<" = "<<experiments.at(i)->getRobot(j)->getNbrAtom()<<endl;
         }
 
     }
@@ -113,19 +113,14 @@ int main(int argc, char *argv[])
     //Openning desired file !
 
     QApplication app(argc,argv);                       //fsmlog
-    QString fichier = QFileDialog::getOpenFileName(nullptr,"Open File","", "Files (*fsmlog)"); // searching the file with file extention control!
-    //QSize screen_size = app.screens()[0]->size();
-
-
+    QString fichier = QFileDialog::getOpenFileName(nullptr,"Open File","", "Files (*fsmlog)"); // searching the file with file extention control! 
     ifstream file(fichier.toStdString());
-    //ifstream file("/Users/ammar/Desktop/PROJ-H402/Traces_Analysis_Tool/test2.txt");
     string line;
 
     while (getline(file,line)){
-        //getline(file,line);
 
         if(line.at(0) == '['){          //information about the experiment
-            exp_info.push_back(line);
+            infoAboutExperiment.push_back(line);
             if(line.at(7) == 'T' && line.at(8) == 'o'){parseExpLength(line);} //Total length of experiment
         }
 
@@ -134,21 +129,21 @@ int main(int argc, char *argv[])
             for (int i=5; i < (int)line.length(); i++){
                 nbr+=line.at(i);
             }
-            createExperiment(stoi(nbr),exp_length);
+            createExperiment(stoi(nbr),experimentLength);
             //cout<<nbr<<endl;
         }
         else if (line.at(0) == '-' && line.at(2) == 't') {
-            if(line.at(4)=='0'){exp_list.back()->createRobot(exp_list.back()->getRobots());}  //creating a new robot can also do with the t below
+            if(line.at(4)=='0'){experiments.back()->createRobot(experiments.back()->getRobots());}  //creating a new robot
             int t=-1,s=-1,n=-1;          // not initiate can creat problems
             string stateInfo="";
             double f=0;
             parseAtom(t, s, stateInfo, n, f, line);
-            exp_list.back()->getLastRobot()->createAtom(t,s,stateInfo,n,f);
-            exp_list.back()->getLastRobot()->setAtom(0);
+            experiments.back()->getLastRobot()->createAtom(t,s,stateInfo,n,f);
+            experiments.back()->getLastRobot()->setAtom(0);
         }
         else {
             if(line.at(2)=='f'){parseNbrStates(line);}
-            global_info.push_back(line);  //global information or error line
+            infoAboutAllExperiments.push_back(line);  //global information or error line
         }
     }
 
@@ -161,7 +156,7 @@ int main(int argc, char *argv[])
 
     //Gui main menu !
 
-    Interface2 mn(nullptr, &exp_list, &global_info,nstates);
+    Interface2 mn(nullptr, &experiments, &infoAboutAllExperiments,nbrStates);
     mn.show();
 
 
@@ -174,6 +169,5 @@ int main(int argc, char *argv[])
     ////
 
     return app.exec();
-    return 0;
 }
 

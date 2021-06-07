@@ -3,6 +3,16 @@
 
 #include <QDialog>
 #include "robot.h"
+#include <QVBoxLayout>
+#include <QTreeView>
+#include <QStandardItemModel>
+#include <QListView>
+#include <string>
+#include <QString>
+
+using std::to_string;
+
+
 
 class RobotInfoWidget: public QDialog
 {

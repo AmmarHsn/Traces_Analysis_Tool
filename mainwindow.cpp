@@ -22,10 +22,8 @@ MainWindow::MainWindow()
     setCentralWidget(centralZone);      // set a widget in the center ! wiget can contain other widgets!
 
     //MENU WIDGET
-    QMenu *menuFichier = menuBar()->addMenu("Fichier");    //les & sont des raccourci clavier!
-    //QMenu *menuEdition = menuBar()->addMenu("Edition");
-    //QMenu *menuAffichage = menuBar()->addMenu("&Affichage");
-    QAction *actionQuitter = new QAction("&Quitter", this);
+    QMenu *menuFichier = menuBar()->addMenu("Fichier");
+    QAction *actionQuitter = new QAction("Quitter", this);
     menuFichier->addAction(actionQuitter);
 
     //barre

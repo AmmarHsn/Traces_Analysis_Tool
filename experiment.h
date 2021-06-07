@@ -29,7 +29,7 @@ public:
     void createRobot(int nbr);
     Robot* getRobot(int pos);
     Robot* getLastRobot();
-    static void init_counter();
+    //static void init_counter();
 };
 
 #endif // EXPERIMENT_H

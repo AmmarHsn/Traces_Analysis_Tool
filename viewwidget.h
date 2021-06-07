@@ -2,8 +2,16 @@
 #define VIEWWIDGET_H
 
 
-#include <QWidget>
 #include <experiment.h>
+#include <QWidget>
+#include <QVBoxLayout>
+#include <QTreeView>
+#include <QStandardItemModel>
+#include <QListView>
+#include <string>
+#include <QString>
+
+
 
 class ViewWidget : public QWidget
 {

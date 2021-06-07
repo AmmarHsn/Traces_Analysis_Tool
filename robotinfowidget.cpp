@@ -1,16 +1,6 @@
 #include "robotinfowidget.h"
 
-//a faire monter
-#include <QVBoxLayout>
-#include <QTreeView>
-#include <QStandardItemModel>
-#include <QListView>
-#include <string>
-#include <QString>
-//testing
-#include <iostream>
 
-using std::to_string;
 
 RobotInfoWidget::RobotInfoWidget(Robot* rob): QDialog()
 {
@@ -41,7 +31,6 @@ RobotInfoWidget::RobotInfoWidget(Robot* rob): QDialog()
     vue->setModel(modele);
     layout->addWidget(vue);
     setLayout(layout);
-    //setModal(true);
     this->exec();
 
 }

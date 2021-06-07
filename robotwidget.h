@@ -3,8 +3,6 @@
 
 #include <QWidget>
 #include "robot.h"
-//A retirer
-#include<QMessageBox>
 #include "robotinfowidget.h"
 
 namespace Ui {
@@ -27,7 +25,7 @@ public slots:
 
 protected:
     void mouseDoubleClickEvent(QMouseEvent* event)
-    {//QMessageBox::information(this,"","Button::mouseDoubleClickEvent");
+    {
         new RobotInfoWidget(robot);
     }
 

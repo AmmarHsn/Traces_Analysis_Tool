@@ -24,7 +24,6 @@ private:
     int nbrAtom=0;
 public:
     Robot(int nbr);
-    //void addAtom(Atom& atom);
     void createAtom(int t, int s, string stateInfo,int n, double sens);
     void setAtom(int time);
 

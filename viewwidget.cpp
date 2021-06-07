@@ -2,17 +2,6 @@
 
 
 
-#include <QVBoxLayout>
-#include <QTreeView>
-#include <QStandardItemModel>
-#include <QListView>
-#include <string>
-#include <QString>
-
-using std::to_string;
-//testing
-#include <iostream>
-
 
 
 ViewWidget::ViewWidget(vector<string>* glb, vector<Experiment*>* exp_list) : QWidget()

@@ -1,14 +1,7 @@
 #include "zoom.h"
 #include "ui_zoom.h"
 
-//a monter
-#include <QToolBar>
-//A retirer
-#include <iostream>
-#include <QSlider>
-#include <QLabel>
 
-#include <QPushButton>
 
 
 Zoom::Zoom(QWidget *parent, vector<RobotWidget*>* showing_robots) :
@@ -43,9 +36,7 @@ Zoom::~Zoom()
 
 int Zoom::grid_size(){
     QSize total_width =ui->scrollArea->size();
-    //std::cout<<total_width.width()<<std::endl;
     QSize rob = showing_robots->at(0)->minimumSize();
-    //std::cout<<rob.width()<<std::endl;
     int factor = (int) total_width.width()/rob.width();
     return factor;
 }

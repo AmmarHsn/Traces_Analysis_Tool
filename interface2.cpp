@@ -17,7 +17,7 @@ Interface2::Interface2(QWidget *parent, vector<Experiment*>* exp_list, vector<st
     this->showFullScreen();
     load_expr();
     cw = new ColorWidget(this,nstates);
-    ui->verticalLayout->addWidget(cw); // tester avec n grand !
+    ui->verticalLayout->addWidget(cw);
     QObject::connect(cw,SIGNAL(setColor()),this,SLOT(setColor()));
     QObject::connect(ui->my_treeWidget, SIGNAL(itemClicked(QTreeWidgetItem*,int)), this, SLOT(setRobots(QTreeWidgetItem*)));
     QObject::connect(ui->horizontalSlider, SIGNAL(valueChanged(int)), ui->spinBox, SLOT(setValue(int)));
@@ -42,12 +42,10 @@ void Interface2::load_expr(){
 }
 
 //delete robot widget to avoid memomry leak
-void Interface2::delete_showing_robots(){                                   //don't known if it necessary
+void Interface2::delete_showing_robots(){
     for(int i=0; i<(int)showing_robots.size();i++){
-        //std::cout<<showing_robots.at(i)->robot->getName()<<std::endl;
         ui->gridLayout_5->removeWidget(showing_robots.at(i));
         delete showing_robots.at(i);
-        //std::cout<<showing_robots.at(i)->robot->getName()<<std::endl;     //Why is this still working after delete?
     }
     showing_robots.clear();
 }
@@ -66,7 +64,6 @@ int Interface2::grid_size(){
 
 //slots
 void Interface2::setRobots(QTreeWidgetItem *item){
-    //ui->verticalLayout->clear();
     delete_showing_robots();
     QString exp_name = item->text(0);
     string name = exp_name.toStdString();

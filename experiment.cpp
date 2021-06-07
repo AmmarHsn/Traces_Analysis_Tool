@@ -4,7 +4,6 @@ Experiment::Experiment(string name, vector<string> info,int score,int timeSteps)
 {
     this->name="Experiment "+name;
     this->information=info;
-    //this->robots=nbrRobots;
     this->score=score;
     this->timSteps=timeSteps;
 }

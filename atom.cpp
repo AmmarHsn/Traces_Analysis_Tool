@@ -1,8 +1,6 @@
 #include "atom.h"
 
 
-#include <iostream>
-
 Atom::Atom(int t, int s, string stateInfo,int n, double sens)
 {
     this->time=t;

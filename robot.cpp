@@ -2,7 +2,6 @@
 
 Robot::Robot(int nbr){this->name="Robot"+std::to_string(nbr+1);}
 
-//void Robot::addAtom(Atom& atom){this->config.push_back(&atom);}
 
 void Robot::createAtom(int t, int s, string stateInfo,int n, double sens){this->config.push_back(new Atom(t,s,stateInfo,n,sens));nbrAtom++;}
 

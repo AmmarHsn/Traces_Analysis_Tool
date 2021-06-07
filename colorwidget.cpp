@@ -1,18 +1,6 @@
 #include "colorwidget.h"
 #include "ui_colorwidget.h"
 
-//a monter en haut
-#include <string.h>
-using std::string;
-using std::to_string;
-#include <QPushButton>
-#include <QVBoxLayout>
-#include <QVBoxLayout>
-#include <QString>
-#include <QColorDialog>
-
-//a retire
-#include <iostream>
 
 
 ColorWidget::ColorWidget(QWidget *parent, int nstates) :

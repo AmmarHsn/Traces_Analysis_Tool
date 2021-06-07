@@ -4,8 +4,18 @@
 #include <QWidget>
 #include <QLabel>
 #include <vector>
-using std::vector;
 #include "mypushboutton.h"
+
+#include <string.h>
+#include <QPushButton>
+#include <QVBoxLayout>
+#include <QVBoxLayout>
+#include <QString>
+#include <QColorDialog>
+
+using std::string;
+using std::to_string;
+using std::vector;
 
 
 

@@ -10,10 +10,7 @@
 //GUI interface
 #include <QApplication>
 #include <QtWidgets>
-#include "mainwindow.h"
 #include "interface2.h"
-#include "viewwidget.h"
-
 
 
 
@@ -160,12 +157,6 @@ int main(int argc, char *argv[])
     mn.show();
 
 
-
-/*
-    //SIMPLE GUI
-    ViewWidget vieuw(&global_info,&exp_list);
-    vieuw.show();
-*/
     ////
 
     return app.exec();

@@ -15,7 +15,6 @@ SOURCES += \
         robot.cpp \
         robotinfowidget.cpp \
         robotwidget.cpp \
-        viewwidget.cpp \
         zoom.cpp
 
 HEADERS += \
@@ -27,7 +26,6 @@ HEADERS += \
     robot.h \
     robotinfowidget.h \
     robotwidget.h \
-    viewwidget.h \
     zoom.h
 
 DISTFILES += \

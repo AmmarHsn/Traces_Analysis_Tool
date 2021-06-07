@@ -11,7 +11,6 @@ SOURCES += \
         experiment.cpp \
         interface2.cpp \
         main.cpp \
-        mainwindow.cpp \
         mypushboutton.cpp \
         robot.cpp \
         robotinfowidget.cpp \
@@ -24,7 +23,6 @@ HEADERS += \
     colorwidget.h \
     experiment.h \
     interface2.h \
-    mainwindow.h \
     mypushboutton.h \
     robot.h \
     robotinfowidget.h \
